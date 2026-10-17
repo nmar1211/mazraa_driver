@@ -52,11 +52,12 @@ String? resolveAuthRedirect({
 final appRouterProvider = Provider<GoRouter>((ref) {
   final auth = ref.read(authControllerProvider);
   return GoRouter(
-    initialLocation: _ciSmokeHome ? '/home' : '/splash',
+    // Audit-only branch: the existing CI flag opens the canonical screen 01.
+    initialLocation: _ciSmokeHome ? '/onboarding' : '/splash',
     refreshListenable: auth,
     redirect: (context, state) {
       if (_ciSmokeHome) {
-        return state.matchedLocation == '/home' ? null : '/home';
+        return state.matchedLocation == '/onboarding' ? null : '/onboarding';
       }
       return resolveAuthRedirect(
         authState: auth.state,
@@ -110,8 +111,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: '/profile',
-                builder: (_, _) => const ProfileScreen(),
-              ),
+                builder: (_, _) => const ProfileScreen()),
             ],
           ),
         ],
