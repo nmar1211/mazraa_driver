@@ -138,9 +138,9 @@ PY
 
 window_has_complete_home() {
   [[ -s artifacts/window.xml ]] || return 1
-  grep -Eq "أنت متصل|You are online" artifacts/window.xml 2>/dev/null \
-    && grep -Fq "SHP-9101" artifacts/window.xml 2>/dev/null \
-    && grep -Fq "YER" artifacts/window.xml 2>/dev/null
+  grep -Eq "صباح الخير، عبدالرحمن|Good morning" artifacts/window.xml 2>/dev/null \
+    && grep -Eq "طلبات اليوم|Today's orders" artifacts/window.xml 2>/dev/null \
+    && grep -Eq "ابدأ استقبال الطلبات|Start receiving orders" artifacts/window.xml 2>/dev/null
 }
 
 # CI_SMOKE_HOME renders deterministic, fully-loaded HomeScreen data. Do not
@@ -161,13 +161,13 @@ for attempt in $(seq 1 45); do
       continue
     fi
 
-    if grep -Eq "أنت متصل|You are online" artifacts/window.xml 2>/dev/null; then
+    if grep -Eq "صباح الخير، عبدالرحمن|Good morning" artifacts/window.xml 2>/dev/null; then
       profile_ready=true
     fi
-    if grep -Fq "SHP-9101" artifacts/window.xml 2>/dev/null; then
+    if grep -Eq "طلبات اليوم|Today's orders" artifacts/window.xml 2>/dev/null; then
       shipment_ready=true
     fi
-    if grep -Fq "YER" artifacts/window.xml 2>/dev/null; then
+    if grep -Eq "ابدأ استقبال الطلبات|Start receiving orders" artifacts/window.xml 2>/dev/null; then
       wallet_ready=true
     fi
   fi

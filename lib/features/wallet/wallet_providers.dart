@@ -6,11 +6,11 @@ import 'package:mazraa_driver/core/network/providers.dart';
 final walletSummaryProvider = FutureProvider<WalletSummary>((ref) async {
   if (BuildFlags.ciSmokeHome) {
     return const WalletSummary(
-      balance: 28650,
-      currency: 'YER',
+      balance: 286,
+      currency: 'SAR',
       accountNumber: 'DRV-SMOKE-77',
-      monthlyCredits: 74200,
-      monthlyDebits: 45550,
+      monthlyCredits: 286,
+      monthlyDebits: 0,
       pendingTopUpBalance: 0,
       canTransfer: true,
     );

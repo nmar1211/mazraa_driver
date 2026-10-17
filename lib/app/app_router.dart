@@ -46,7 +46,9 @@ String? resolveAuthRedirect({
     return isPublic ? null : '/login';
   }
 
-  return isPublic ? '/journey/03' : null;
+  // The authenticated production landing page is the real HomeScreen.
+  // /journey/03 remains an explicit internal reference/audit route only.
+  return isPublic ? '/home' : null;
 }
 
 final appRouterProvider = Provider<GoRouter>((ref) {
