@@ -41,3 +41,6 @@ flutter:
     # Runtime-sized derivatives of the exact ASSET_INDEX artwork. Original
     # reference PNG files remain untouched under refrinces/assets_primary/.
     - assets/reference_runtime/
+    # Canonical screen 01 is used only as the source for clipped decorative
+    # artwork. All controls/text remain native Flutter widgets.
+    - refrinces/screens/01_onboarding.png
