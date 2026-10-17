@@ -1,0 +1,30 @@
+name: Screen 04 Reference Export
+
+on:
+  push:
+    branches:
+      - chatgpt/visual-audit-screen-04-20261017
+  workflow_dispatch:
+
+jobs:
+  export-reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify screen 04 reference and primary assets
+        run: |
+          test -s refrinces/screens/04_orders_list.png
+          test -s refrinces/assets_primary/by_screen/04/01_asset_orders_produce_thumbnail.png
+          test -s refrinces/assets_primary/by_screen/04/02_asset_farm_crate.png
+          test -s refrinces/assets_primary/by_screen/04/03_asset_delivery_parcel.png
+          test -s refrinces/assets_primary/by_screen/04/04_asset_home_pin.png
+          test -s refrinces/assets_primary/by_screen/04/05_asset_route_arrow.png
+      - name: Export screen 04 visual reference
+        uses: actions/upload-artifact@v4
+        with:
+          name: screen-04-reference
+          path: |
+            refrinces/screens/04_orders_list.png
+            refrinces/assets_primary/by_screen/04/*.png
+          if-no-files-found: error
+          retention-days: 7

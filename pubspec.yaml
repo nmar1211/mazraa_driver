@@ -41,3 +41,9 @@ flutter:
     # Runtime-sized derivatives of the exact ASSET_INDEX artwork. Original
     # reference PNG files remain untouched under refrinces/assets_primary/.
     - assets/reference_runtime/
+    # Screen 03 uses this canonical reference layer directly because the old
+    # runtime alias incorrectly pointed at asset_route_map_pin_cluster.
+    - refrinces/assets_primary/by_screen/03/01_asset_home_route_dashboard.png
+    # Screen 04 crops its four card photos, logo and driver portrait directly
+    # from the canonical reference. No substitute/generated artwork is used.
+    - refrinces/screens/04_orders_list.png

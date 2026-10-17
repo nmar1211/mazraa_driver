@@ -1,0 +1,48 @@
+name: Screen 04 Visual Audit
+
+on:
+  push:
+    branches:
+      - chatgpt/visual-audit-screen-04-20261017
+    paths:
+      - 'lib/**'
+      - 'audit/screen04_capture_test.dart'
+      - 'refrinces/screens/04_orders_list.png'
+      - 'pubspec.yaml'
+      - '.github/workflows/screen-04-visual-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: screen-04-visual-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.49.0-0.2.pre
+          channel: beta
+          cache: true
+
+      - name: Resolve packages
+        run: flutter pub get
+
+      - name: Render production screen 04
+        run: flutter test --update-goldens audit/screen04_capture_test.dart
+
+      - name: Upload actual screen 04 capture
+        uses: actions/upload-artifact@v4
+        with:
+          name: screen-04-actual
+          path: audit/screen04_actual.png
+          if-no-files-found: error
+          retention-days: 7

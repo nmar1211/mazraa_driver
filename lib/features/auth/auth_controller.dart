@@ -26,18 +26,18 @@ class AuthController extends ChangeNotifier {
       profile = const DriverProfile(
         userId: 77,
         driverCode: 'DRV-SMOKE-77',
-        name: 'سائق مزرعتي',
+        name: 'عبدالرحمن',
         email: 'driver-smoke@local.invalid',
-        phone: '+967 000 000 000',
+        phone: '+966 500 000 000',
         vehicleType: 'Motorcycle',
         approvalStatus: 'Approved',
-        operationalStatus: 'Online',
-        isAcceptingOrders: true,
+        operationalStatus: 'Offline',
+        isAcceptingOrders: false,
         isVerified: true,
         ratingAverage: 4.9,
         ratingCount: 128,
-        currentLatitude: 15.3621,
-        currentLongitude: 44.1982,
+        currentLatitude: 24.7136,
+        currentLongitude: 46.6753,
       );
     }
   }
@@ -187,6 +187,7 @@ class AuthController extends ChangeNotifier {
   }
 
   Future<void> refreshProfile() async {
+    if (BuildFlags.ciSmokeHome) return;
     final current = session;
     if (current == null) return;
     profile = await _api.getDriver(current.userId).timeout(_requestTimeout);

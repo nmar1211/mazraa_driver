@@ -61,20 +61,20 @@ void main() {
       );
     });
 
-    test('authenticated drivers continue at reference screen 03', () {
+    test('authenticated drivers land on the production screen 03 home', () {
       expect(
         resolveAuthRedirect(
           authState: AuthState.authenticated,
           location: '/splash',
         ),
-        '/journey/03',
+        '/home',
       );
       expect(
         resolveAuthRedirect(
           authState: AuthState.authenticated,
           location: '/login',
         ),
-        '/journey/03',
+        '/home',
       );
     });
 

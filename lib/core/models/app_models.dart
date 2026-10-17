@@ -77,23 +77,22 @@ class DriverProfile {
     email: (json['email'] ?? '').toString(),
     phone: (json['phone'] ?? '').toString(),
     vehicleType: _enumLabel(json['vehicleType'], const [
-      'None',
-      'Motorcycle',
       'Car',
+      'Bike',
       'Van',
       'Truck',
     ]),
-    approvalStatus: _enumLabel(json['approvalStatus'], const [
+    approvalStatus: _oneBasedEnumLabel(json['approvalStatus'], const [
       'Pending',
       'Approved',
       'Rejected',
       'Suspended',
     ]),
-    operationalStatus: _enumLabel(json['operationalStatus'], const [
+    operationalStatus: _oneBasedEnumLabel(json['operationalStatus'], const [
       'Offline',
       'Online',
+      'Available',
       'Busy',
-      'OnBreak',
     ]),
     isAcceptingOrders: json['isAcceptingOrders'] == true,
     isVerified: json['isVerified'] == true,
@@ -408,6 +407,14 @@ DateTime? _asDate(Object? value) =>
 String _enumLabel(Object? value, List<String> labels) {
   if (value is num && value.toInt() >= 0 && value.toInt() < labels.length) {
     return labels[value.toInt()];
+  }
+  return value?.toString() ?? labels.first;
+}
+
+String _oneBasedEnumLabel(Object? value, List<String> labels) {
+  if (value is num) {
+    final index = value.toInt() - 1;
+    if (index >= 0 && index < labels.length) return labels[index];
   }
   return value?.toString() ?? labels.first;
 }
